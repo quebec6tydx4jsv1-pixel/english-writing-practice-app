@@ -48,6 +48,11 @@
 
 ---
 
+## 画面遷移図
+https://www.figma.com/make/8BctSYbpCnDOi4cEoekBPo/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3%E4%BD%9C%E6%88%90?t=xecbg08ZmETeOz2W-0
+
+---
+
 ## ユーザーの獲得について
 - SNS（X、Instagram）で「英語は聞けるのに話せない」層に向けて発信
 - 英会話を始める前の予習などに
