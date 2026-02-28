@@ -1,0 +1,7 @@
+<h1>回答詳細</h1>
+
+<p><strong>問題:</strong> <%= @user_answer.question.text %></p>
+<p><strong>回答:</strong> <%= @user_answer.answer_text %></p>
+<p><strong>ユーザー:</strong>
+  <%= @user_answer.user&.email || "ゲスト" %>
+</p>
