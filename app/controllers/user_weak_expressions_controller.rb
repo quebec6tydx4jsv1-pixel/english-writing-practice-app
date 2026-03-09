@@ -12,8 +12,8 @@ class UserWeakExpressionsController < ApplicationController
       .includes(:mistake)
 
     render json: uwes.as_json(
-      only: [:id, :note, :created_at],
-      include: {
+      only: [:id, :note, :created_at], # UserWeakExpressionのid、note、created_atの属性のみを含めるように指定
+      include: { # mistakeの内容もJSONに含めるように指定。以下の属性のみを含めるように指定
         mistake: {
           only: [:id, :expression_text, :category, :reason]
         }
