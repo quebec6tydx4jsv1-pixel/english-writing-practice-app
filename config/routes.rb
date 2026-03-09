@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
+  get "mistakes/index"
   get "ai_corrections/create"
   # get "home/index"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#index"
-  
-  resorces :user_answers, only: [:show] do
+
+  resources :user_answers, only: [:show] do
     resource :ai_correction, only: [:create]
   end
+
+  resources :ai_corrections do # リソースをネストさせ、AI Correction に関連する Mistake を管理するためのルーティングを定義
+    resources :mistakes, only: [:index]
+  end
+
+  resources :user_weak_expressions, only: [:create, :index, :update] # ユーザーの弱点表現を管理するためのルーティングを定義
 
   # resources :user_answers, only: [:show] # これで /user_answers/:id にアクセスすると UserAnswersController の show アクションが呼び出されるようになります。
   # get "user_answers/show"
