@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_04_072011) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_08_115304) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -59,6 +59,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_04_072011) do
     t.index ["user_id"], name: "index_user_answers_on_user_id"
   end
 
+  create_table "user_weak_expressions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "mistake_id", null: false
+    t.text "note"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["mistake_id"], name: "index_user_weak_expressions_on_mistake_id"
+    t.index ["user_id"], name: "index_user_weak_expressions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
@@ -76,4 +86,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_04_072011) do
   add_foreign_key "questions", "themes"
   add_foreign_key "user_answers", "questions"
   add_foreign_key "user_answers", "users"
+  add_foreign_key "user_weak_expressions", "mistakes"
+  add_foreign_key "user_weak_expressions", "users"
 end
