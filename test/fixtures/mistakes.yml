@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ai_correction: one
+  expression_text: MyString
+  category: MyString
+  reason: MyText
+
+two:
+  ai_correction: two
+  expression_text: MyString
+  category: MyString
+  reason: MyText
