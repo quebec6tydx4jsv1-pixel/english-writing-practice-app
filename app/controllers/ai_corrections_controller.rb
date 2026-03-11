@@ -4,7 +4,7 @@ class AiCorrectionsController < ApplicationController
 
     result = mock_correction(user_answer.answer_text) # 引数のanswer_textがUserの英作文の中身。以下のprivateメソッドの処理結果を格納
 
-    ai_correction = user_answer.create_ai_correction!( #resultからAI添削の内容を取り出して、AI添削をDBに保存
+    ai_correction = user_answer.create_ai_correction!( #resultからAI添削の内容を取り出して、AI添削をDBに保存。create_ai_correction!は、UserAnswerモデルに定義された関連メソッドで、AI Correctionを作成して保存するためのもの。user_answerに紐づくAI Correctionがすでに存在する場合はエラーになることに注意。
       corrected_text: result[:corrected_text], # 添削された英文 
       score: result[:score], # 添削スコア。AIが採点した点数
       feedback_json: result[:feedback_json], # 添削コメントのJSONデータ。AIが提供するフィードバックをJSON形式で保存
