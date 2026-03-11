@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get "mistakes/index"
-  get "ai_corrections/create"
+  get "mistakes/index" # scaffold で自動生成されたルーティングだが、下記の resources :ai_corrections 内で mistakes をネストさせているため、こちらは不要になる可能性が高い。
+  get "ai_corrections/create" # こちらも scaffold で自動生成されたルーティングだが、AI Correction の作成は User Answer に対して行うため、こちらも不要になる可能性が高い。
   # get "home/index"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -14,7 +14,13 @@ Rails.application.routes.draw do
     resources :mistakes, only: [:index]
   end
 
-  resources :user_weak_expressions, only: [:create, :index, :update] # ユーザーの弱点表現を管理するためのルーティングを定義
+  resources :user_weak_expressions, only: [:index, :create, :update] do # リソースをネストさせ、User Weak Expression に関連する Review Question を管理するためのルーティングを定義
+    resource :review_question, only: [:show]
+  end
+
+  resources :review_answers, only: [:create]
+
+  resource :dashboard, only: [:show] # ダッシュボードのルーティングを定義
 
   # resources :user_answers, only: [:show] # これで /user_answers/:id にアクセスすると UserAnswersController の show アクションが呼び出されるようになります。
   # get "user_answers/show"
