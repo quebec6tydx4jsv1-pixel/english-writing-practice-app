@@ -10,9 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_10_023639) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_11_025829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "ai_corrections", force: :cascade do |t|
+    t.text "corrected_text"
+    t.datetime "created_at", null: false
+    t.jsonb "feedback_json"
+    t.integer "score"
+    t.datetime "updated_at", null: false
+    t.bigint "user_answer_id", null: false
+    t.index ["user_answer_id"], name: "index_ai_corrections_on_user_answer_id", unique: true
+  end
+
+  create_table "mistakes", force: :cascade do |t|
+    t.bigint "ai_correction_id", null: false
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.string "expression_text"
+    t.text "reason"
+    t.datetime "updated_at", null: false
+    t.index ["ai_correction_id"], name: "index_mistakes_on_ai_correction_id"
+  end
 
   create_table "questions", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -21,6 +41,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_023639) do
     t.bigint "theme_id", null: false
     t.datetime "updated_at", null: false
     t.index ["theme_id"], name: "index_questions_on_theme_id"
+  end
+
+  create_table "review_answers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "review_answer_text"
+    t.bigint "review_question_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["review_question_id"], name: "index_review_answers_on_review_question_id"
+    t.index ["user_id"], name: "index_review_answers_on_user_id"
+  end
+
+  create_table "review_questions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "question_text"
+    t.datetime "updated_at", null: false
+    t.bigint "user_weak_expression_id", null: false
+    t.index ["user_weak_expression_id"], name: "index_review_questions_on_user_weak_expression_id"
   end
 
   create_table "themes", force: :cascade do |t|
@@ -40,6 +78,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_023639) do
     t.index ["user_id"], name: "index_user_answers_on_user_id"
   end
 
+  create_table "user_weak_expressions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "mistake_id", null: false
+    t.text "note"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["mistake_id"], name: "index_user_weak_expressions_on_mistake_id"
+    t.index ["user_id", "mistake_id"], name: "index_user_weak_expressions_on_user_id_and_mistake_id", unique: true
+    t.index ["user_id"], name: "index_user_weak_expressions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
@@ -55,6 +104,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_023639) do
   add_foreign_key "ai_corrections", "user_answers"
   add_foreign_key "mistakes", "ai_corrections"
   add_foreign_key "questions", "themes"
+  add_foreign_key "review_answers", "review_questions"
+  add_foreign_key "review_answers", "users"
+  add_foreign_key "review_questions", "user_weak_expressions"
   add_foreign_key "user_answers", "questions"
   add_foreign_key "user_answers", "users"
   add_foreign_key "user_weak_expressions", "mistakes"
