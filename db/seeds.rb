@@ -7,3 +7,18 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+# db/seeds.rb
+
+# ===== User =====
+User.find_or_create_by!(email: "test@example.com") do |u|
+  u.password = "password"
+  u.password_confirmation = "password"
+end
+
+# ===== Question =====
+Question.create!(
+  text: "昨日何をしましたか？",
+  input_theme: "日常会話",
+  input_situation: "昨日の出来事",
+  source: "seed"
+)
