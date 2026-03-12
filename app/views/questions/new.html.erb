@@ -1,0 +1,17 @@
+<h1>英作文テーマ選択</h1>
+
+<%= form_with model: Question.new do |f| %>
+
+  <div>
+    <label>テーマ</label>
+    <%= f.text_field :theme %>
+  </div>
+
+  <div>
+    <label>具体的な状況など</label>
+    <%= f.text_field :situation %>
+  </div>
+
+  <%= f.submit "入力" %>
+
+<% end %>

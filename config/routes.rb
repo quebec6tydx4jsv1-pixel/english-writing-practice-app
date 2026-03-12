@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 
   resource :dashboard, only: [:show] # ダッシュボードのルーティングを定義
 
+  resources :questions, only: [:new, :create, :show] # 問題の作成と表示のルーティングを定義。これにより、ユーザーが新しい問題を作成したり、既存の問題を表示したりできるように
+
+
   # resources :user_answers, only: [:show] # これで /user_answers/:id にアクセスすると UserAnswersController の show アクションが呼び出されるようになります。
   # get "user_answers/show"
 
