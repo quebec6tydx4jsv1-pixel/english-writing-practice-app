@@ -1,0 +1,16 @@
+<h1>英作文入力</h1>
+
+<div>
+  <label>日本語</label>
+  <p><%= @question.text %></p>
+</div>
+
+<div>
+  <label>英作文入力</label>
+
+  <%= form_with url: user_answers_path, method: :post do |f| %>
+    <%= f.text_area :answer_text, rows: 6 %>
+    <%= f.hidden_field :question_id, value: @question.id %>
+    <%= f.submit "入力" %>
+  <% end %>
+</div>
