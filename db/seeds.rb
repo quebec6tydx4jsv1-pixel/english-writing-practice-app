@@ -16,9 +16,10 @@ User.find_or_create_by!(email: "test@example.com") do |u|
 end
 
 # ===== Question =====
-Question.create!(
-  text: "昨日何をしましたか？",
+Question.find_or_create_by!(
+  text: "昨日何をしましたか？"
+) do |q|
   input_theme: "日常会話",
   input_situation: "昨日の出来事",
   source: "seed"
-)
+end
