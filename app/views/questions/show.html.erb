@@ -8,9 +8,14 @@
 <div>
   <label>英作文入力</label>
 
-  <%= form_with url: user_answers_path, method: :post do |f| %>
-    <%= f.text_area :answer_text, rows: 6 %>
+  <%= form_with model: UserAnswer.new, url: user_answers_path do |f| %>
+
     <%= f.hidden_field :question_id, value: @question.id %>
+
+    <%= f.text_area :answer_text, rows: 6 %>
+
     <%= f.submit "入力" %>
+
   <% end %>
+
 </div>

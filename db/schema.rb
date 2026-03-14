@@ -36,11 +36,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_11_025829) do
 
   create_table "questions", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.text "input_situation"
+    t.text "input_theme"
     t.string "source"
     t.text "text"
-    t.bigint "theme_id", null: false
     t.datetime "updated_at", null: false
-    t.index ["theme_id"], name: "index_questions_on_theme_id"
   end
 
   create_table "review_answers", force: :cascade do |t|
@@ -59,13 +59,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_11_025829) do
     t.datetime "updated_at", null: false
     t.bigint "user_weak_expression_id", null: false
     t.index ["user_weak_expression_id"], name: "index_review_questions_on_user_weak_expression_id"
-  end
-
-  create_table "themes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.text "description"
-    t.string "name"
-    t.datetime "updated_at", null: false
   end
 
   create_table "user_answers", force: :cascade do |t|
@@ -103,7 +96,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_11_025829) do
 
   add_foreign_key "ai_corrections", "user_answers"
   add_foreign_key "mistakes", "ai_corrections"
-  add_foreign_key "questions", "themes"
   add_foreign_key "review_answers", "review_questions"
   add_foreign_key "review_answers", "users"
   add_foreign_key "review_questions", "user_weak_expressions"
