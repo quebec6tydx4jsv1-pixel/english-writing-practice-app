@@ -3,8 +3,8 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    theme = question_params[:theme]
-    situation = question_params[:situation]
+    theme = question_params[:input_theme]
+    situation = question_params[:input_situation]
 
     # AIで問題文生成
     question_text = QuestionGenerationService.call(theme, situation)
@@ -27,6 +27,6 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:theme, :situation)
+    params.require(:question).permit(:input_theme, :input_situation)
   end
 end
