@@ -19,7 +19,7 @@ end
 Question.find_or_create_by!(
   text: "昨日何をしましたか？"
 ) do |q|
-  input_theme: "日常会話",
-  input_situation: "昨日の出来事",
-  source: "seed"
+  input_theme =  "日常会話"
+  input_situation = "昨日の出来事"
+  source = "seed"
 end

@@ -22,6 +22,12 @@ class UserWeakExpressionsController < ApplicationController
     redirect_to user_weak_expressions_path
   end
 
+  def destroy
+    @user_weak_expression = current_user.user_weak_expressions.find(params[:id])
+    @user_weak_expression.destroy!
+    redirect_to user_weak_expressions_path
+  end
+  
   private
 
   def uwe_params
