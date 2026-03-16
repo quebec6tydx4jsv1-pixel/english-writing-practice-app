@@ -10,19 +10,14 @@ Rails.application.routes.draw do
     resource :ai_correction, only: [:create]
   end
 
-  resources :user_weak_expressions, only: [:index, :create, :edit, :update] do
+  resources :user_weak_expressions, only: [:index, :create, :edit, :update, :destroy] do
     resource :review_question, only: [:show] do
       resources :review_answers, only: [:create, :show]
     end
   end
 
-  resources :user_weak_expressions, only: [:index, :create, :edit, :update] do # リソースをネストさせ、User Weak Expression に関連する Review Question を管理するためのルーティングを定義
-    resource :review_question, only: [:show]
-  end
-
   resource :dashboard, only: [:show]
 
-  # resources :user_answers, only: [:show] # これで /user_answers/:id にアクセスすると UserAnswersController の show アクションが呼び出されるようになります。
   # get "user_answers/show"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

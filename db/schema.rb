@@ -15,13 +15,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_11_025829) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "ai_corrections", force: :cascade do |t|
+    t.bigint "correctable_id", null: false
+    t.string "correctable_type", null: false
     t.text "corrected_text"
     t.datetime "created_at", null: false
     t.jsonb "feedback_json"
     t.integer "score"
     t.datetime "updated_at", null: false
-    t.bigint "user_answer_id", null: false
-    t.index ["user_answer_id"], name: "index_ai_corrections_on_user_answer_id", unique: true
+    t.index ["correctable_type", "correctable_id"], name: "index_ai_corrections_on_correctable"
   end
 
   create_table "mistakes", force: :cascade do |t|
@@ -94,7 +95,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_11_025829) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "ai_corrections", "user_answers"
   add_foreign_key "mistakes", "ai_corrections"
   add_foreign_key "review_answers", "review_questions"
   add_foreign_key "review_answers", "users"

@@ -1,7 +1,7 @@
 class CreateAiCorrections < ActiveRecord::Migration[8.1]
   def change
     create_table :ai_corrections do |t|
-      t.references :user_answer, null: false, foreign_key: true, index: { unique: true }
+      t.references :correctable, polymorphic: true, null: false
       t.text :corrected_text
       t.integer :score
       t.jsonb :feedback_json
