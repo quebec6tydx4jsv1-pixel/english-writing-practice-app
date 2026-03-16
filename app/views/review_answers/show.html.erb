@@ -1,0 +1,44 @@
+<h1 class="text-2xl font-bold mb-6">反復練習添削結果</h1>
+
+<div class="space-y-6">
+
+  <!-- 模範解答 -->
+  <div>
+    <h2 class="text-xl font-semibold mb-2">模範解答</h2>
+    <div class="p-4 border rounded bg-gray-50">
+      <%= @review_answer.ai_correction.corrected_text %>
+    </div>
+  </div>
+
+  <!-- あなたの回答 -->
+  <div>
+    <h2 class="text-xl font-semibold mb-2">あなたの解答</h2>
+    <div class="p-4 border rounded bg-gray-50">
+      <%= @review_answer.answer_text %>
+    </div>
+  </div>
+
+  <!-- 克服した表現 -->
+  <div>
+    <h2 class="text-xl font-semibold mb-2">克服した表現</h2>
+    <div class="p-4 border rounded bg-gray-50">
+      <%= @uwe.mistake.expression_text %>
+    </div>
+  </div>
+
+  <!-- 登録解除ボタン -->
+  <div class="mt-6">
+    <%= button_to "登録解除",
+          user_weak_expression_path(@uwe),
+          method: :delete,
+          class: "px-4 py-2 bg-red-500 text-white rounded" %>
+  </div>
+
+  <!-- 一覧へ戻るリンク -->
+  <div class="mt-6 text-center">
+    <%= link_to "弱点一覧に戻る",
+        user_weak_expressions_path,
+        class: "text-blue-600 underline" %>
+  </div>
+
+</div>
