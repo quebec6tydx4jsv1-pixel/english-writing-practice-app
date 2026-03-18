@@ -27,7 +27,7 @@ class UserWeakExpressionsController < ApplicationController
     @user_weak_expression.destroy!
     redirect_to user_weak_expressions_path
   end
-  
+
   private
 
   def uwe_params
