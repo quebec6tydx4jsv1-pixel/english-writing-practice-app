@@ -13,18 +13,16 @@
       model: @review_answer,
       url: user_weak_expression_review_question_review_answers_path(@uwe),
       method: :post,
-      local: true,
       data: { turbo: false }
     ) do |f| %>
 
     <%= f.text_area :review_answer_text,
-          name: "review_answer[review_answer_text]",
           rows: 4,
           class: "w-full border rounded p-3",
           placeholder: "英作文を入力してください" %>
 
     <div class="mt-4 text-center">
-      <%= f.submit "入力", class: "btn btn-primary" %>
+      <%= f.submit "入力", class: "btn btn-primary", data: { turbo: false } %>
     </div>
 
   <% end %>
