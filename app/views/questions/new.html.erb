@@ -1,17 +1,32 @@
-<h1>英作文テーマ選択</h1>
+<h1 class="text-2xl font-bold mb-6">英作文テーマ入力</h1>
 
-<%= form_with model: Question.new do |f| %>
+<div class="border rounded-lg p-6 shadow-sm bg-white">
 
-  <div>
-    <label>テーマ</label>
-    <%= f.text_field :input_theme %>
-  </div>
+  <%= form_with model: Question.new, local: true do |f| %>
 
-  <div>
-    <label>具体的な状況など</label>
-    <%= f.text_field :input_situation %>
-  </div>
+    <!-- テーマ -->
+    <div class="mb-4">
+      <label class="block font-semibold mb-1">テーマ</label>
+      <%= f.text_field :input_theme,
+            placeholder: "例：趣味、日常生活、旅行、仕事など",
+            class: "w-full border rounded p-2" %>
+    </div>
 
-  <%= f.submit "入力" %>
+    <!-- 具体的な状況 -->
+    <div class="mb-6">
+      <label class="block font-semibold mb-1">具体的な状況など</label>
+      <%= f.text_area :input_situation,
+            rows: 5,
+            placeholder: "例：昨日の夜、友達と映画を見に行った場面など",
+            class: "w-full border rounded p-2" %>
+    </div>
 
-<% end %>
+    <!-- 右寄せの入力ボタン -->
+    <div class="flex justify-end">
+      <%= f.submit "入力",
+            class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition inline-flex items-center text-sm" %>
+    </div>
+
+  <% end %>
+
+</div>

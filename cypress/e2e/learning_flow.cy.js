@@ -25,7 +25,10 @@ describe("Learning Flow", () => {
     cy.contains("あなたの回答")
 
     // ログイン
-    cy.contains("a", "ログイン").click()
+    cy.get(".login-section a.btn").contains("ログイン").click()
+
+    cy.url().should("include", "/users/sign_in")
+    cy.get("#user_email").should("be.visible")
 
     cy.get("#user_email").type("test@example.com")
     cy.get("#user_password").type("password")

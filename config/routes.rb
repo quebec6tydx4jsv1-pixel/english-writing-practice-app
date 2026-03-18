@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get "terms", to: "pages#terms"
+  get "privacy", to: "pages#privacy"
+  get "contact", to: "pages#contact"
+  
+  # get "pages/terms"
+  # get "pages/privacy"
+  # get "pages/contact"
   # get "home/index"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
