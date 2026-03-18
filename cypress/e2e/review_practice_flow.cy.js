@@ -26,7 +26,7 @@ describe("Review Practice Flow", () => {
     // 回答
     cy.get("textarea[name='review_answer[review_answer_text]']")
       .type("I go shopping yesterday")
-    cy.get("input[type='submit']").click()
+        cy.get("input[type='submit']").click()
 
     // 添削結果
     cy.contains("模範解答")

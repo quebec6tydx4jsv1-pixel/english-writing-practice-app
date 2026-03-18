@@ -1,30 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= content_for(:title) || "Myapp" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Myapp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Myapp</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= yield :head %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+</head>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+<!-- Turboを無効化して、ページ遷移のたびに完全なリロードを行う -->
+<body data-turbo="false" class="min-h-screen flex flex-col bg-gray-50">
 
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+  <!-- Header -->
+  <header class="bg-white shadow">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-xl font-bold">
+        <%= link_to "Myapp", root_path %>
+      </div>
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%#　<%= stylesheet_link_tag :app, "data-turbo-track": "reload" %><%# :app`がというstylesheetは存在しないため、以下のように変更 %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-  </head>
+      <nav class="flex space-x-4">
+        <%= link_to "ホーム", root_path, class: "text-gray-700 hover:text-blue-600" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "text-gray-700 hover:text-blue-600" %>
+        <% if user_signed_in? %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to "ログイン", new_user_session_path %>
+        <% end %>
+      </nav>
+    </div>
+  </header>
 
-  <body>
+  <!-- Main -->
+  <main class="flex-1 max-w-5xl mx-auto w-full px-4 py-8">
     <%= yield %>
-  </body>
-</html>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-center space-x-6 text-sm text-gray-600">
+      <%= link_to "利用規約", terms_path %>
+      <%= link_to "プライバシーポリシー", privacy_path %>
+      <%= link_to "お問い合わせ", contact_path %>
+    </div>
+  </footer>
+
+</body>
