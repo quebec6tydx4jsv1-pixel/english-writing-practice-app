@@ -25,7 +25,7 @@ class UserWeakExpressionsController < ApplicationController
   def destroy
     @user_weak_expression = current_user.user_weak_expressions.find(params[:id])
     @user_weak_expression.destroy!
-    redirect_to user_weak_expressions_path
+    redirect_to user_weak_expressions_path, notice: "削除しました"
   end
 
   private
