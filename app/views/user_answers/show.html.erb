@@ -1,83 +1,90 @@
 <h1 class="text-2xl font-bold mb-6">添削結果</h1>
 
-<!-- 模範解答 -->
-<div class="border rounded-lg p-4 shadow-sm bg-white mb-6">
-  <h2 class="text-lg font-semibold mb-2">模範解答</h2>
-  <p class="text-gray-800">
-    <%= @user_answer.ai_correction&.corrected_text || "（ここに模範解答が表示されます）" %>
-  </p>
-</div>
+<div class="border rounded-lg p-6 shadow-sm bg-white space-y-6">
 
-<!-- あなたの回答 -->
-<div class="border rounded-lg p-4 shadow-sm bg-white mb-6">
-  <h2 class="text-lg font-semibold mb-2">あなたの回答</h2>
-  <p class="text-gray-800">
-    <%= @user_answer.answer_text %>
-  </p>
-</div>
+  <!-- 模範解答 -->
+  <div>
+    <h2 class="text-lg font-semibold mb-2">模範解答</h2>
+    <p class="text-gray-800 bg-blue-50 p-3 rounded">
+      <%= @user_answer.ai_correction&.corrected_text || "（ここに模範解答が表示されます）" %>
+    </p>
+  </div>
 
-<% if user_signed_in? %>
+  <!-- あなたの解答 -->
+  <div>
+    <h2 class="text-lg font-semibold mb-2">あなたの解答</h2>
+    <p class="text-gray-800 bg-blue-50 p-3 rounded">
+      <%= @user_answer.answer_text %>
+    </p>
+  </div>
 
-  <!-- 苦手な表現候補 -->
-  <div class="border rounded-lg p-4 shadow-sm bg-white mb-6">
-    <h2 class="text-lg font-semibold mb-4">苦手な表現候補</h2>
+  <% if user_signed_in? %>
 
-    <% @mistakes.each do |mistake| %>
-      <div class="flex justify-between items-center mb-3">
-        <span><%= mistake.expression_text %></span>
+    <!-- 苦手な表現候補 -->
+    <div>
+      <h2 class="text-lg font-semibold mb-4">間違えた表現（選択ボタンを押すと下の登録欄に自動入力されます）</h2>
 
-        <button
-          type="button"
-          class="add-mistake-btn bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition"
-          data-expression="<%= mistake.expression_text %>"
-          data-mistake-id="<%= mistake.id %>">
-          ＋登録
-        </button>
+      <% @mistakes.each do |mistake| %>
+        <div class="flex justify-between items-center mb-3">
+          <span class="bg-red-50 text-red-600 px-3 py-1 rounded">
+            <%= mistake.expression_text %>
+          </span>
+
+          <button
+            type="button"
+            class="add-mistake-btn px-3 py-1 border border-blue-300 text-blue-600 rounded hover:bg-blue-50 transition text-sm"
+            data-expression="<%= mistake.expression_text %>"
+            data-mistake-id="<%= mistake.id %>">
+            選択
+          </button>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- 登録する苦手表現 -->
+    <div>
+      <h2 class="text-lg font-semibold mb-4">登録する苦手表現</h2>
+
+      <%= form_with model: @user_weak_expression, local: true do |f| %>
+
+        <%= f.hidden_field :mistake_id, id: "mistake_id_field" %>
+
+        <%= f.text_field :expression,
+              id: "weak_expression_input",
+              placeholder: "登録する表現を入力",
+              class: "w-full border rounded p-2 mb-4" %>
+
+        <div class="flex justify-end">
+          <%= f.submit "登録＆苦手表現一覧へ",
+                class: "px-4 py-2 border border-blue-300 text-blue-600 rounded hover:bg-blue-50 transition text-sm" %>
+        </div>
+
+      <% end %>
+    </div>
+
+  <% else %>
+
+    <!-- ログイン案内 -->
+    <div class="space-y-4">
+
+      <div class="flex items-center gap-3">
+        <p class="m-0 w-[800px]">苦手な表現を登録する場合はログインしてください</p>
+
+        <%= link_to "ログインへ進む",
+              new_user_session_path(return_to: request.fullpath),
+              class: "px-5 py-1 border border-blue-300 text-blue-600 rounded hover:bg-blue-50 transition text-sm whitespace-nowrap" %>
       </div>
-    <% end %>
-  </div>
 
-  <!-- 登録する苦手表現 -->
-  <div class="border rounded-lg p-4 shadow-sm bg-white mb-6">
-    <h2 class="text-lg font-semibold mb-4">登録する苦手表現</h2>
+      <div class="flex items-center gap-3">
+        <p class="m-0 w-[800px]">会員登録される方はこちら</p>
 
-    <%= form_with model: @user_weak_expression, local: true do |f| %>
+        <%= link_to "新規登録へ進む",
+            new_user_registration_path,
+            class: "px-5 py-1 border border-green-300 text-green-600 rounded hover:bg-green-50 transition text-sm whitespace-nowrap" %>
+      </div>
 
-      <%= f.hidden_field :mistake_id, id: "mistake_id_field" %>
-
-      <%= f.text_field :expression,
-            id: "weak_expression_input",
-            placeholder: "登録する表現を入力",
-            class: "w-full border rounded p-2 mb-4" %>
-      
-      <div class="flex justify-end">
-        <%= f.submit "登録＆苦手表現一覧へ",
-              class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition inline-flex items-center text-sm"  %>
-
-    <% end %>
-  </div>
-
-<% else %>
-
-  <!-- ログイン案内 -->
-  <div class="border rounded-lg p-4 shadow-sm bg-white mb-6 space-y-4">
-
-    <div class="flex items-center gap-3">
-      <p class="m-0 w-[800px]">苦手な表現を登録する場合はログインしてください</p>
-
-      <%= link_to "ログイン",
-            new_user_session_path(return_to: request.fullpath),
-            class: "bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition text-sm inline-flex items-center" %>
     </div>
 
-    <div class="flex items-center gap-3">
-      <p class="m-0 w-[800px]">会員登録される方はこちら</p>
+  <% end %>
 
-      <%= link_to "新規登録",
-          new_user_registration_path,
-          class: "bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm inline-flex items-center" %>
-    </div>
-
-  </div>
-
-<% end %>
+</div>
