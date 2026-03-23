@@ -8,7 +8,7 @@ describe("Learning Flow", () => {
 
     // テーマ入力
     cy.get("input[name='question[input_theme]']").type("日常会話")
-    cy.get("input[name='question[input_situation]']").type("昨日の出来事")
+    cy.get("textarea[name='question[input_situation]']").type("昨日の出来事")
     cy.get("input[type='submit']").click()
 
     // 出題
@@ -22,10 +22,10 @@ describe("Learning Flow", () => {
 
     // 添削結果ページ
     cy.contains("模範解答")
-    cy.contains("あなたの回答")
+    cy.contains("あなたの解答")
 
     // ログイン
-    cy.get(".login-section a.btn").contains("ログイン").click()
+    cy.contains("ログインへ進む").click()
 
     cy.url().should("include", "/users/sign_in")
     cy.get("#user_email").should("be.visible")
@@ -36,11 +36,10 @@ describe("Learning Flow", () => {
     cy.get("input[type='submit']").click()
 
     // 添削結果に戻る
-    cy.contains("苦手な表現候補")
+    cy.contains("間違えた表現（選択ボタンを押すと下の登録欄に自動入力されます）")
 
     // Mistake候補をクリック
-    cy.contains("＋登録").first().click()
-
+    cy.contains("button", "選択").first().scrollIntoView().click()
     // inputに自動入力される
     cy.get("#weak_expression_input")
       .should("not.have.value", "")

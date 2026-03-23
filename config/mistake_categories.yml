@@ -1,0 +1,59 @@
+# config/mistake_categories.yml
+tense: "時制"
+tense_error: "時制"
+past_tense: "時制"
+present_tense: "時制"
+future_tense: "時制"
+
+third_person_s: "三単現"
+third_person: "三単現"
+subject_verb_agreement: "主語と動詞の一致"
+sv_agreement: "主語と動詞の一致"
+
+collocation: "語法"
+collocation_error: "語法"
+phrase: "語法"
+
+preposition: "前置詞"
+preposition_error: "前置詞"
+preposition_collocation: "前置詞"
+
+article: "冠詞"
+article_usage: "冠詞"
+a_an_the: "冠詞"
+
+vocabulary: "語彙"
+word_choice: "語彙"
+word_usage: "語彙"
+
+spelling: "スペル"
+typo: "スペル"
+
+capitalization: "大文字"
+capitalisation: "大文字"
+
+countable_uncountable: "可算/不可算"
+number: "数"
+
+pronoun: "代名詞"
+pronoun_case: "代名詞"
+
+idiom: "イディオム"
+idiomatic: "イディオム"
+
+grammar: "文法"
+syntax: "語順"
+
+modal: "助動詞"
+modal_verb: "助動詞"
+
+passive: "受動態"
+voice: "受動態"
+
+conjunction: "接続詞"
+relative_clause: "関係詞"
+
+punctuation: "句読点"
+
+register: "語調/丁寧さ"
+politeness: "語調/丁寧さ"
