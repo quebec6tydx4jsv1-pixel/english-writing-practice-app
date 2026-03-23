@@ -2,8 +2,14 @@
 
 <div class="max-w-2xl mx-auto bg-white p-6 rounded shadow">
 
-  <h2 class="text-lg font-semibold mb-2">日本語</h2>
-  <p class="border p-3 rounded bg-gray-50">
+  <!-- ★ 苦手表現の表示 -->
+  <h2 class="text-lg font-semibold mb-2">今回使う苦手表現</h2>
+  <p class="bg-red-50 text-red-600 p-3 rounded font-semibold">
+    <%= @uwe.mistake.expression_text %>
+  </p>
+
+  <h2 class="text-lg font-semibold mb-2 mt-6">以下の文章を苦手表現を使って英語にしなさい</h2>
+  <p class="border p-3 rounded bg-blue-50">
     <%= @review_question.question_text %>
   </p>
 
@@ -11,7 +17,7 @@
 
   <%= form_with(
       model: @review_answer,
-      url: user_weak_expression_review_question_review_answers_path(@uwe),
+      url: user_weak_expression_review_question_review_answer_path(@uwe, @review_question, @review_answer),
       method: :post,
       data: { turbo: false }
     ) do |f| %>
@@ -22,9 +28,18 @@
           placeholder: "英作文を入力してください" %>
 
     <div class="mt-4 text-center">
-      <%= f.submit "入力", class: "btn btn-primary", data: { turbo: false } %>
+      <%= f.submit "入力",
+            class: "px-4 py-2 border border-blue-300 text-blue-600 rounded hover:bg-blue-50 transition text-sm",
+            data: { turbo: false } %>
     </div>
 
   <% end %>
+
+  <!-- ★ 戻るボタンを追加 -->
+  <div class="mt-6 text-center">
+    <%= link_to "弱点一覧に戻る",
+          user_weak_expressions_path,
+          class: "inline-block px-4 py-2 bg-gray-100 text-gray-700 border border-gray-300 rounded hover:bg-gray-200 transition text-sm" %>
+  </div>
 
 </div>
