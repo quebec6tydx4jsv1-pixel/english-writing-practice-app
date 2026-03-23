@@ -21,6 +21,8 @@ gem "jbuilder"
 # 認証用にdevise追加
 gem "devise"
 
+gem "ruby-openai"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
