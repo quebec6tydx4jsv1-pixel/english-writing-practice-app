@@ -2,6 +2,14 @@
 
 <div class="border rounded-lg p-6 shadow-sm bg-white space-y-6">
 
+  <!-- 問題文 -->
+  <div>
+    <h2 class="text-lg font-semibold mb-2">問題文</h2>
+    <p class="text-gray-800 bg-blue-50 p-3 rounded">
+      <%= @user_answer.question.text %>
+    </p>
+  </div>
+
   <!-- 模範解答 -->
   <div>
     <h2 class="text-lg font-semibold mb-2">模範解答</h2>
@@ -18,41 +26,100 @@
     </p>
   </div>
 
+  <!-- コメント -->
+  <div class="bg-blue-50 p-3 rounded">
+    <h2 class="text-lg font-semibold mb-2">コメント</h2>
+
+    <% if @user_answer.ai_correction&.feedback_json.present? %>
+      <ul class="list-disc pl-6 space-y-1">
+        <% @user_answer.ai_correction.feedback_json["comments"].each do |comment| %>
+          <li class="text-gray-700"><%= comment %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-500">（コメントはまだありません）</p>
+    <% end %>
+  </div>
+
+  <!-- 点数 -->
+  <div>
+    <h2 class="text-lg font-semibold mb-2">点数(10点満点)</h2>
+    <p class="text-gray-800 bg-blue-50 p-3 rounded">
+      <%= @user_answer.ai_correction&.score || "（点数はまだありません）" %>
+    </p>
+  </div>
+
   <% if user_signed_in? %>
 
-    <!-- 苦手な表現候補 -->
+    <!-- 覚えたい表現候補 -->
     <div>
-      <h2 class="text-lg font-semibold mb-4">間違えた表現（選択ボタンを押すと下の登録欄に自動入力されます）</h2>
+      <h2 class="text-lg font-semibold mb-4">
+        覚えたい表現候補（選択ボタンを押すと下の登録欄に自動入力されます）
+      </h2>
 
       <% @mistakes.each do |mistake| %>
-        <div class="flex justify-between items-center mb-3">
-          <span class="bg-red-50 text-red-600 px-3 py-1 rounded">
-            <%= mistake.expression_text %>
-          </span>
+        <div class="flex justify-between items-start border rounded p-4 mb-4 bg-white shadow-sm">
 
-          <button
-            type="button"
-            class="add-mistake-btn px-3 py-1 border border-blue-300 text-blue-600 rounded hover:bg-blue-50 transition text-sm"
-            data-expression="<%= mistake.expression_text %>"
-            data-mistake-id="<%= mistake.id %>">
-            選択
-          </button>
+          <!-- 左側：表現・項目・理由 -->
+          <div class="flex-1 space-y-2">
+
+            <!-- 表現（赤背景） -->
+            <div class="flex items-center">
+              <span class="text-sm font-semibold text-gray-700 w-12 shrink-0">表現：</span>
+              <span class="bg-red-50 text-red-600 px-3 py-1 rounded font-semibold">
+                <%= mistake.expression_text %>
+              </span>
+            </div>
+
+            <!-- 項目（category） -->
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-semibold text-gray-700 w-12 shrink-0">項目：</span>
+              <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded font-semibold">
+                <%= mistake.category %>
+              </span>
+            </div>
+
+            <!-- 理由（reason） -->
+            <div>
+              <span class="text-sm font-semibold text-gray-700 w-12 shrink-0">理由：</span>
+              <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded font-semibold">
+                <%= mistake.reason %>
+              </span>
+            </div>
+
+          </div>
+
+          <!-- 右側：選択ボタン（縦中央に固定） -->
+          <div class="flex items-center ml-6">
+            <button
+              type="button"
+              class="add-mistake-btn px-3 py-1 border border-blue-300 text-blue-600 rounded hover:bg-blue-50 transition text-sm whitespace-nowrap"
+              data-expression="<%= mistake.expression_text %>"
+              data-mistake-id="<%= mistake.id %>">
+              選択
+            </button>
+          </div>
+
         </div>
       <% end %>
     </div>
+
 
     <!-- 登録する苦手表現 -->
     <div>
       <h2 class="text-lg font-semibold mb-4">登録する苦手表現</h2>
 
+      <!-- ★ 選択済みリスト（ここに JS で追加される） -->
+      <div id="selected_list" class="space-y-2 mb-4"></div>
+
       <%= form_with model: @user_weak_expression, local: true do |f| %>
 
-        <%= f.hidden_field :mistake_id, id: "mistake_id_field" %>
+        <%= hidden_field_tag "user_weak_expression[mistake_ids][]", "", id: "mistake_ids_field" %>
 
-        <%= f.text_field :expression,
-              id: "weak_expression_input",
-              placeholder: "登録する表現を入力",
-              class: "w-full border rounded p-2 mb-4" %>
+        <%#= f.text_field :expression,
+              # id: "weak_expression_input",
+              # placeholder: "登録する表現を入力",
+              # class: "w-full border rounded p-2 mb-4" %>
 
         <div class="flex justify-end">
           <%= f.submit "登録＆苦手表現一覧へ",

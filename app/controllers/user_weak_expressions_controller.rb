@@ -2,7 +2,15 @@ class UserWeakExpressionsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @user_weak_expression = current_user.user_weak_expressions.create!(uwe_params)
+    mistake_ids = params[:user_weak_expression][:mistake_ids].to_s.split(",")
+
+    mistake_ids.each do |mistake_id|
+      current_user.user_weak_expressions.create!(
+        mistake_id: mistake_id,
+        note: params[:user_weak_expression][:note]
+      )
+    end
+
     redirect_to user_weak_expressions_path
   end
 
@@ -31,6 +39,6 @@ class UserWeakExpressionsController < ApplicationController
   private
 
   def uwe_params
-    params.require(:user_weak_expression).permit(:mistake_id, :note)
+    params.require(:user_weak_expression).permit(:mistake_ids, :note)
   end
 end

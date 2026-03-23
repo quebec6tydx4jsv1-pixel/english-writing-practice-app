@@ -2,6 +2,14 @@
 
 <div class="border rounded-lg p-6 shadow-sm bg-white space-y-6">
 
+  <!-- 元の日本語 -->
+  <div>
+    <h2 class="text-lg font-semibold mb-2">問題文（日本語）</h2>
+    <p class="text-gray-800 bg-blue-50 p-3 rounded">
+      <%= @review_question.question_text %>
+    </p>
+  </div>
+
   <!-- 模範解答 -->
   <div>
     <h2 class="text-lg font-semibold mb-2">模範解答</h2>
@@ -18,6 +26,21 @@
     </p>
   </div>
 
+  <!-- コメント -->
+  <div>
+    <h2 class="text-lg font-semibold mb-2">コメント</h2>
+
+    <% if @review_answer.ai_correction&.feedback_json.present? %>
+      <ul class="list-disc pl-6 space-y-1 bg-yellow-50 p-3 rounded">
+        <% @review_answer.ai_correction.feedback_json["comments"].each do |comment| %>
+          <li class="text-yellow-800"><%= comment %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-500 bg-yellow-50 p-3 rounded">（コメントはまだありません）</p>
+    <% end %>
+  </div>
+
   <!-- 克服した表現 -->
   <div>
     <h2 class="text-lg font-semibold mb-2">克服した表現</h2>
@@ -26,7 +49,7 @@
     </p>
   </div>
 
-  <!-- 登録解除ボタン（白背景＋赤文字＋赤枠線） -->
+  <!-- 登録解除ボタン -->
   <div class="mt-6 flex justify-end">
     <%= button_to "登録解除",
           user_weak_expression_path(@uwe),
@@ -34,7 +57,7 @@
           class: "px-4 py-2 border border-red-300 text-red-600 rounded hover:bg-red-50 transition text-sm" %>
   </div>
 
-  <!-- 弱点一覧に戻る（白背景＋緑文字＋緑枠線） -->
+  <!-- 弱点一覧に戻る -->
   <div class="mt-2 flex justify-end">
     <%= link_to "弱点一覧に戻る",
         user_weak_expressions_path,
