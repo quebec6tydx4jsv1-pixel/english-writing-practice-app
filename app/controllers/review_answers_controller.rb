@@ -7,7 +7,7 @@ class ReviewAnswersController < ApplicationController
     @uwe = @review_question.user_weak_expression
   end
 
-  def create
+  def update
     # 1. 既存の ReviewAnswer を取得（URL の :id を使う）
     @review_answer = ReviewAnswer.find(params[:id])
 

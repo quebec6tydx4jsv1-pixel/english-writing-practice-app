@@ -31,13 +31,13 @@
     <h2 class="text-lg font-semibold mb-2">コメント</h2>
 
     <% if @review_answer.ai_correction&.feedback_json.present? %>
-      <ul class="list-disc pl-6 space-y-1 bg-yellow-50 p-3 rounded">
+      <ul class="list-disc pl-6 space-y-1 bg-blue-50 p-3 rounded">
         <% @review_answer.ai_correction.feedback_json["comments"].each do |comment| %>
-          <li class="text-yellow-800"><%= comment %></li>
+          <li class="text-gray-700"><%= comment %></li>
         <% end %>
       </ul>
     <% else %>
-      <p class="text-gray-500 bg-yellow-50 p-3 rounded">（コメントはまだありません）</p>
+      <p class="text-gray-500 bg-blue-50 p-3 rounded">（コメントはまだありません）</p>
     <% end %>
   </div>
 

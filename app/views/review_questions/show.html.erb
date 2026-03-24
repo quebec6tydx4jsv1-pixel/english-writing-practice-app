@@ -18,7 +18,7 @@
   <%= form_with(
       model: @review_answer,
       url: user_weak_expression_review_question_review_answer_path(@uwe, @review_question, @review_answer),
-      method: :post,
+      method: :patch,
       data: { turbo: false }
     ) do |f| %>
 
