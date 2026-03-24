@@ -114,7 +114,7 @@
 
       <%= form_with model: @user_weak_expression, local: true do |f| %>
 
-        <%= hidden_field_tag "user_weak_expression[mistake_ids][]", "", id: "mistake_ids_field" %>
+        <%= hidden_field_tag "user_weak_expression[mistake_ids]", "", id: "mistake_ids_field" %>
 
         <%#= f.text_field :expression,
               # id: "weak_expression_input",
@@ -153,5 +153,15 @@
     </div>
 
   <% end %>
+
+  <!-- 次のアクション -->
+  <div class="mt-6 flex justify-center gap-4">
+    <%= link_to "問題文へ戻る",
+          question_path(@user_answer.question),
+          class: "px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition text-sm" %>
+    <%= link_to "新しい英作文テーマを作成",
+          new_question_path,
+          class: "px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition text-sm" %>
+  </div>
 
 </div>

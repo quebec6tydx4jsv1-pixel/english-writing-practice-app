@@ -21,6 +21,7 @@
       <%= form_with model: uwe,
                     url: user_weak_expression_path(uwe),
                     method: :patch,
+                    data: { turbo: false },
                     class: "mt-4" do |f| %>
 
         <%= f.text_area :note,
@@ -37,10 +38,9 @@
 
       <!-- ▼ 反復練習ボタン（位置変更・見た目変更） -->
       <div class="flex justify-end mt-2">
-        <%= button_to "反復練習する",
+        <%= link_to "反復練習する",
             user_weak_expression_review_questions_path(uwe),
-            method: :post,
-            data: { turbo: false },
+            data: { turbo_method: :post },
             class: "review-practice-link px-3 py-1 border border-green-300 text-green-600 rounded hover:bg-green-50 transition text-xs" %>
       </div>
 
@@ -49,7 +49,8 @@
         <%= button_to "苦手表現を削除",
               user_weak_expression_path(uwe),
               method: :delete,
-              data: { turbo: false, confirm: "本当に削除しますか？" },
+              form: { data: { turbo: false } },
+              data: { confirm: "本当に削除しますか？" },
               class: "px-3 py-1 border border-gray-300 text-red-500 rounded hover:bg-gray-50 transition text-xs" %>
       </div>
 
