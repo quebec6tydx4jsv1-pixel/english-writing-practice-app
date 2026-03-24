@@ -9,14 +9,16 @@
   <%= javascript_include_tag "application", type: "module" %>
 </head>
 
-<!-- Turboを無効化して、ページ遷移のたびに完全なリロードを行う -->
-<body data-turbo="false" class="min-h-screen flex flex-col bg-gray-50">
+<body class="min-h-screen flex flex-col bg-gray-50">
 
   <!-- Header -->
   <header class="bg-white shadow">
     <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-      <div class="text-xl font-bold">
-        <%= link_to "英作文アプリ", root_path %>
+      <div class="text-2xl font-extrabold tracking-tight relative inline-block">
+        <%= link_to root_path, class: "relative z-10 text-gray-800 hover:text-blue-600 transition" do %>
+          英作文アプリ
+        <% end %>
+        <span class="absolute bottom-0 left-0 w-full h-2 bg-blue-200/40 rounded"></span>
       </div>
 
       <nav class="flex space-x-4">
@@ -24,7 +26,7 @@
         <% if user_signed_in? %>
           <%= link_to "英作文作成", new_question_path, class: "text-gray-700 hover:text-blue-600" %>
           <%= link_to "苦手表現一覧", user_weak_expressions_path, class: "text-gray-700 hover:text-blue-600" %>
-          <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-gray-700 hover:text-blue-600" %>
+          <%= button_to "ログアウト", destroy_user_session_path, method: :delete, form: { data: { turbo: false } }, class: "text-gray-700 hover:text-blue-600" %>
         <% else %>
           <%= link_to "新規登録", new_user_registration_path, class: "text-gray-700 hover:text-blue-600" %>
           <%= link_to "ログイン", new_user_session_path %>

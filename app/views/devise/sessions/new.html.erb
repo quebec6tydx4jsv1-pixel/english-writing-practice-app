@@ -2,7 +2,7 @@
 
 <div class="border rounded-lg p-6 shadow-sm bg-white max-w-md mx-auto">
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { data: { turbo: false } }) do |f| %>
 
     <%= hidden_field_tag :return_to, params[:return_to] if params[:return_to].present? %>
 

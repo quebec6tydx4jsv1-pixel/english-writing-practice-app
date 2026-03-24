@@ -1,4 +1,7 @@
 class QuestionsController < ApplicationController
+  include UsageTrackable
+  before_action :check_usage_limit, only: [:create]
+
   def new
   end
 
@@ -6,10 +9,8 @@ class QuestionsController < ApplicationController
     theme = question_params[:input_theme]
     situation = question_params[:input_situation]
 
-    # AIで問題文生成
     question_text = QuestionGenerationService.call(theme, situation)
 
-    # DB保存
     @question = Question.create!(
       text: question_text,
       input_theme: theme,
@@ -17,6 +18,7 @@ class QuestionsController < ApplicationController
       source: "ai"
     )
 
+    increment_usage!
     redirect_to @question
   end
 
