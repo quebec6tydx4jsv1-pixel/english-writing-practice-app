@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   include UsageTrackable
-  before_action :check_usage_limit, only: [:create]
+  before_action :check_usage_limit, only: [ :create ]
 
   def new
   end
