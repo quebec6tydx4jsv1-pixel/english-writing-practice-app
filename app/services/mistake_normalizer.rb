@@ -77,3 +77,4 @@ class MistakeNormalizer
   def present?(v)
     v.respond_to?(:present?) ? v.present? : !v.nil? && v.to_s.strip != ''
   end
+end
