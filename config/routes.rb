@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :user_weak_expressions, only: [:index, :create, :edit, :update, :destroy] do
     resources :review_questions, only: [:create, :show] do
-      resources :review_answers, only: [:create, :show]
+      resources :review_answers, only: [:create, :show, :update]
     end
   end
 

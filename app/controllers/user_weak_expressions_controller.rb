@@ -2,7 +2,7 @@ class UserWeakExpressionsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    mistake_ids = params[:user_weak_expression][:mistake_ids].to_s.split(",")
+    mistake_ids = Array(params[:user_weak_expression][:mistake_ids]).join(",").split(",")
 
     mistake_ids.each do |mistake_id|
       current_user.user_weak_expressions.create!(

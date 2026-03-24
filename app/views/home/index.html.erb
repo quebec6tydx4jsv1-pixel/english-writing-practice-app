@@ -1,18 +1,115 @@
-<h1 class="text-2xl font-bold mb-6 text-center">トップページ</h1>
+<div class="bg-gray-50 py-12">
+  <div class="max-w-4xl mx-auto px-4 text-center">
 
-<div class="border rounded-lg p-6 shadow-sm bg-white">
+    <!-- キャッチコピー -->
+    <h1 class="text-3xl md:text-5xl font-black text-gray-800 tracking-tight leading-tight mb-6">
+      英会話力を、<br>
+      <span class="relative inline-block">
+        <span class="relative z-10 text-blue-600">毎日の英作文で</span>
+        <span class="absolute bottom-1 left-0 w-full h-3 bg-blue-200/50 rounded-full -z-0"></span>
+      </span>
+      伸ばそう
+    </h1>
 
-  <!-- メインビジュアル -->
-  <div class="mb-6">
-    <%= image_tag "top.png", class: "w-2/3 mx-auto rounded shadow" %>
+    <!-- サブコピー -->
+    <p class="text-gray-600 mb-10 text-lg">
+      テーマを入力すると AI が日本語文を生成。<br>
+      あなたは英作文を書くことに集中できます。
+    </p>
+
+    <!-- メインビジュアル（大きくした版） -->
+    <div class="mb-10">
+      <%= image_tag "top.png",
+            class: "w-full max-w-2xl mx-auto rounded-xl shadow-lg" %>
+    </div>
 
   </div>
+</div>
 
-  <!-- 英作文開始ボタン -->
-  <div class="flex justify-center mt-6">
+<!-- アプリの価値説明セクション -->
+<div class="bg-white py-16">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+      本アプリの目的と目的
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-10">
+
+      <!-- 1. 瞬間英作文で会話力を鍛える -->
+      <div class="p-6 bg-gray-50 rounded-xl shadow-sm">
+        <div class="text-blue-600 text-4xl mb-4">⚡</div>
+        <h3 class="text-xl font-semibold mb-3">瞬間英作文で会話力を強化</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          日本語文をもとに瞬時に英文を作る練習を繰り返し、
+          「理解できるのに話せない」を根本から改善します。
+        </p>
+      </div>
+
+      <!-- 2. AI が弱点を可視化 -->
+      <div class="p-6 bg-gray-50 rounded-xl shadow-sm">
+        <div class="text-blue-600 text-4xl mb-4">🔍</div>
+        <h3 class="text-xl font-semibold mb-3">AI が弱点を自動で可視化</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          添削結果からつまずいた表現を抽出し、苦手表現として保存。
+          自分では気づけない弱点が明確になります。
+        </p>
+      </div>
+
+      <!-- 3. 弱点に合わせた復習問題を自動生成 -->
+      <div class="p-6 bg-gray-50 rounded-xl shadow-sm">
+        <div class="text-blue-600 text-4xl mb-4">🎯</div>
+        <h3 class="text-xl font-semibold mb-3">弱点だけを効率的に反復</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          蓄積された苦手表現をもとに、AI があなた専用の復習問題を生成。
+          最短ルートでアウトプット力が伸びます。
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- 利用制限説明セクション -->
+<div class="bg-white py-12 border-t">
+  <div class="max-w-3xl mx-auto px-6">
+
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">ご利用回数について</h2>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- ゲスト -->
+      <div class="p-6 border rounded-xl bg-gray-50">
+        <h3 class="text-lg font-semibold text-gray-700 mb-4">ゲスト（登録なし）</h3>
+        <ul class="space-y-2 text-sm text-gray-600">
+          <li class="flex justify-between"><span>1日の上限</span><span class="font-bold">3回</span></li>
+          <li class="flex justify-between"><span>月間の上限</span><span class="font-bold">10回</span></li>
+        </ul>
+      </div>
+
+      <!-- 無料会員 -->
+      <div class="p-6 border-2 border-blue-300 rounded-xl bg-blue-50">
+        <h3 class="text-lg font-semibold text-blue-700 mb-4">無料会員（登録済み）</h3>
+        <ul class="space-y-2 text-sm text-gray-600">
+          <li class="flex justify-between"><span>1日の上限</span><span class="font-bold text-blue-700">5回</span></li>
+          <li class="flex justify-between"><span>月間の上限</span><span class="font-bold text-blue-700">100回</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ボタンセクション -->
+<div class="bg-gray-50 py-12">
+  <div class="flex justify-center gap-4">
     <%= link_to "英作文を始める",
           new_question_path,
-          class: "px-4 py-2 border border-blue-300 text-blue-600 rounded hover:bg-blue-50 transition text-sm" %>
-  </div>
+          class: "px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition" %>
 
+    <%= link_to "サインインする",
+          new_user_session_path,
+          class: "px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition" %>
+  </div>
 </div>
