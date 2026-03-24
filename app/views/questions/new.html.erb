@@ -9,7 +9,12 @@
       <label class="block font-semibold mb-1">テーマ</label>
       <%= f.text_field :input_theme,
             placeholder: "例：趣味、日常生活、旅行、仕事など",
+            maxlength: 10,
+            data: { counter_target: "theme" },
             class: "w-full border rounded p-2" %>
+      <p class="text-right text-xs text-gray-400 mt-1">
+        <span id="theme-count">0</span> / 10文字
+      </p>
     </div>
 
     <!-- 具体的な状況 -->
@@ -18,7 +23,12 @@
       <%= f.text_area :input_situation,
             rows: 5,
             placeholder: "例：昨日の夜、友達と映画を見に行った場面など",
+            maxlength: 60,
+            data: { counter_target: "situation" },
             class: "w-full border rounded p-2" %>
+      <p class="text-right text-xs text-gray-400 mt-1">
+        <span id="situation-count">0</span> / 60文字
+      </p>
     </div>
 
     <!-- 右寄せの入力ボタン -->
@@ -30,3 +40,12 @@
   <% end %>
 
 </div>
+
+<script>
+  document.querySelector('[data-counter-target="theme"]').addEventListener('input', function() {
+    document.getElementById('theme-count').textContent = this.value.length;
+  });
+  document.querySelector('[data-counter-target="situation"]').addEventListener('input', function() {
+    document.getElementById('situation-count').textContent = this.value.length;
+  });
+</script>
