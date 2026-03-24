@@ -1,35 +1,34 @@
 class ReviewQuestionsController < ApplicationController
+  include UsageTrackable
   before_action :authenticate_user!
   before_action :set_uwe
+  before_action :check_usage_limit, only: [:create]
 
   def create
-    # AI で問題文生成
     question_text = ReviewQuestionGenerationService.call(@uwe)
 
-    # DB 保存
     @review_question = ReviewQuestion.create!(
       user_weak_expression: @uwe,
       question_text: question_text
     )
 
-    # ★ 空の ReviewAnswer を作る（回答前）
     @review_answer = @review_question.review_answers.create!(
       review_answer_text: "",
       user: current_user
     )
 
+    increment_usage!
     redirect_to user_weak_expression_review_question_path(
       @uwe,
-      @review_question,
-      @review_answer
+      @review_question
     )
   end
 
   def show
     @review_question = ReviewQuestion.find(params[:id])
-    @review_answer = ReviewAnswer.new
-
     @uwe = @review_question.user_weak_expression # 画面上で苦手表現の内容も表示したいため、@uweもセットしておく
+    # @review_answer = ReviewAnswer.new
+    @review_answer = @review_question.review_answers.first
   end
 
   private
