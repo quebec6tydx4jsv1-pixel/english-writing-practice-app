@@ -2,7 +2,7 @@ class ReviewQuestionsController < ApplicationController
   include UsageTrackable
   before_action :authenticate_user!
   before_action :set_uwe
-  before_action :check_usage_limit, only: [:create]
+  before_action :check_usage_limit, only: [ :create ]
 
   def create
     question_text = ReviewQuestionGenerationService.call(@uwe)

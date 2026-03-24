@@ -55,7 +55,7 @@ class AiCorrectionService
                   }
                 }
               },
-              required: ["corrected_text", "score", "feedback_json"]
+              required: [ "corrected_text", "score", "feedback_json" ]
             }
           }
         }

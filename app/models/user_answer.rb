@@ -6,5 +6,4 @@ class UserAnswer < ApplicationRecord
   def question_text
     question.text
   end
-
 end

@@ -8,7 +8,7 @@ class ReviewAnswer < ApplicationRecord
   def answer_text
     review_answer_text
   end
-  
+
   def question_text
     review_question.question_text
   end

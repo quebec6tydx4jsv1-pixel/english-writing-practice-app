@@ -3,7 +3,7 @@ class UserAnswersController < ApplicationController
     @user_answer = UserAnswer.create!(user_answer_params)
 
     AiCorrectionService.call(@user_answer)
-    
+
     redirect_to user_answer_path(@user_answer)
   end
 
