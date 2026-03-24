@@ -8,6 +8,6 @@ class CreateUserWeakExpressions < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :user_weak_expressions, [:user_id, :mistake_id], unique: true
+    add_index :user_weak_expressions, [ :user_id, :mistake_id ], unique: true
   end
 end
