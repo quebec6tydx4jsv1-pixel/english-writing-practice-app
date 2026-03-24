@@ -1,8 +1,8 @@
 class MistakeNormalizer
   CATEGORY_MAP = {
-    'tense' => '時制',
-    'capitalization' => '大文字',
-    'collocation' => '語法'
+    "tense" => "時制",
+    "capitalization" => "大文字",
+    "collocation" => "語法"
   }.freeze
 
   ALLOWED_CATEGORIES = %w[時制 大文字 語法 語彙 前置詞].freeze
