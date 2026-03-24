@@ -12,7 +12,7 @@ module Myapp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.1
-    config.i18n.available_locales = [:en, :ja]
+    config.i18n.available_locales = [ :en, :ja ]
     config.i18n.default_locale = :ja
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
