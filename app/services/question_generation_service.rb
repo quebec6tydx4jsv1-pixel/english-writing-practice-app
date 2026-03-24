@@ -17,9 +17,9 @@ class QuestionGenerationService
   private
 
   # def generate_question_text
-    # モック（後で AI に置き換える）
-    #"昨日何をしましたか？"
-  #end
+  #   # モック（後で AI に置き換える）
+  #   "昨日何をしましたか？"
+  # end
 
   def generate_question_text
     client = OpenAI::Client.new(access_token: ENV["OPENAI_API_KEY"])
@@ -47,5 +47,4 @@ class QuestionGenerationService
 
     response.dig("choices", 0, "message", "content")
   end
-
 end

@@ -18,13 +18,13 @@ class ReviewQuestionGenerationService
 
     prompt = <<~PROMPT
       以下の「苦手表現」を必ず使わせる英作文問題の日本語の文章を生成してください。
-      
+
     ▪ 絶対条件
     - 文は、次の苦手表現を含むこと
     - 苦手表現: #{@uwe.mistake.expression_text}
     - 中学生〜社会人が取り組みやすい自然な日本語(1文のみ)
     - 「英訳しなさい」という指示は入れないこと
-    
+
     ■ 補足情報（問題文の内容には使わない）
     - カテゴリ: #{@uwe.mistake.category}
     - 間違えた理由: #{@uwe.mistake.reason}
