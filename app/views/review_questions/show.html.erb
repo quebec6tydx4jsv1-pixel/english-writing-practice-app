@@ -25,7 +25,12 @@
     <%= f.text_area :review_answer_text,
           rows: 4,
           class: "w-full border rounded p-3",
-          placeholder: "英作文を入力してください" %>
+          placeholder: "英作文を入力してください",
+          maxlength: 120,
+          id: "review-answer-text" %>
+    <p class="text-right text-xs text-gray-400 mt-1">
+      <span id="review-answer-count">0</span> / 120文字
+    </p>
 
     <div class="mt-4 text-center">
       <%= f.submit "入力",
@@ -34,6 +39,12 @@
     </div>
 
   <% end %>
+
+  <script>
+    document.getElementById('review-answer-text').addEventListener('input', function() {
+      document.getElementById('review-answer-count').textContent = this.value.length;
+    });
+  </script>
 
   <!-- ★ 戻るボタンを追加 -->
   <div class="mt-6 text-center">

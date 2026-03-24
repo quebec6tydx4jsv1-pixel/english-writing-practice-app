@@ -21,7 +21,12 @@
       <%= f.text_area :answer_text,
             rows: 6,
             placeholder: "ここに英作文を入力してください",
-            class: "w-full border rounded p-2 mb-4" %>
+            maxlength: 120,
+            id: "answer-text",
+            class: "w-full border rounded p-2 mb-1" %>
+      <p class="text-right text-xs text-gray-400 mb-3">
+        <span id="answer-count">0</span> / 120文字
+      </p>
 
       <div class="flex justify-end">
         <%= f.submit "入力",
@@ -32,3 +37,9 @@
   </div>
 
 </div>
+
+<script>
+  document.getElementById('answer-text').addEventListener('input', function() {
+    document.getElementById('answer-count').textContent = this.value.length;
+  });
+</script>
