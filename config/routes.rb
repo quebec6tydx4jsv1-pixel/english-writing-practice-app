@@ -11,19 +11,19 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#index"
 
-  resources :questions, only: [:new, :create, :show] # 問題の作成と表示のルーティングを定義。これにより、ユーザーが新しい問題を作成したり、既存の問題を表示したりできるように
+  resources :questions, only: [ :new, :create, :show ] # 問題の作成と表示のルーティングを定義。これにより、ユーザーが新しい問題を作成したり、既存の問題を表示したりできるように
 
-  resources :user_answers, only: [:create, :show] do
-    resource :ai_correction, only: [:create]
+  resources :user_answers, only: [ :create, :show ] do
+    resource :ai_correction, only: [ :create ]
   end
 
-  resources :user_weak_expressions, only: [:index, :create, :edit, :update, :destroy] do
-    resources :review_questions, only: [:create, :show] do
-      resources :review_answers, only: [:create, :show, :update]
+  resources :user_weak_expressions, only: [ :index, :create, :edit, :update, :destroy ] do
+    resources :review_questions, only: [ :create, :show ] do
+      resources :review_answers, only: [ :create, :show, :update ]
     end
   end
 
-  resource :dashboard, only: [:show]
+  resource :dashboard, only: [ :show ]
 
   # get "user_answers/show"
 
