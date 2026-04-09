@@ -1,7 +1,7 @@
 <% content_for :og_title, "英作文練習: #{@question.input_theme}" %>
 <% content_for :og_description, @question.text&.truncate(80) %>
 <% og_text = ERB::Util.url_encode("英作文練習: #{@question.input_theme}") %>
-<% content_for :og_image, "https://res.cloudinary.com/dgvkgx4dx/image/upload/w_1200,c_scale/l_text:Arial_40:#{og_text},co_rgb:ffffff,g_west,x_60/ogp_rf9wai" %>
+<% content_for :og_image, "https://res.cloudinary.com/dgvkgx4dx/image/upload/w_1200,c_scale/l_text:Arial_40:#{og_text},co_rgb:ffffff,g_north_west,x_60,y_60/ogp_rf9wai" %>
 
 <h1 class="text-2xl font-bold mb-6">英作文入力</h1>
 
