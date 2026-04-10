@@ -1,5 +1,11 @@
-# README
 # 英作文弱点克服アプリ
+
+[![CI](https://github.com/quebec6tydx4jsv1-pixel/english-writing-practice-app/actions/workflows/ci.yml/badge.svg)](https://github.com/quebec6tydx4jsv1-pixel/english-writing-practice-app/actions/workflows/ci.yml)
+
+## テスト・CI
+- **RSpec** によるモデル・リクエストテスト（33例）
+- **FactoryBot + Faker** によるテストデータ生成
+- **GitHub Actions** で push / PR 時に自動実行（lint・セキュリティスキャン・RSpec）
 
 ## サービス概要
 - 日本語を見て、英語を作文することで会話力を磨くアプリです。  
