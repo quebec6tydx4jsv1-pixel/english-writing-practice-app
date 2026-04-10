@@ -5,6 +5,7 @@
 ## テスト・CI
 - **RSpec** によるモデル・リクエストテスト（33例）
 - **FactoryBot + Faker** によるテストデータ生成
+- **RuboCop** による Lint チェック（rubocop-rails-omakase 準拠）
 - **GitHub Actions** で push / PR 時に自動実行（lint・セキュリティスキャン・RSpec）
 
 ## サービス概要
