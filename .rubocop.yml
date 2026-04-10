@@ -1,8 +1,20 @@
 # Omakase Ruby styling for Rails
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+# プロジェクト固有のルール調整
+
+# [ :email ] のようなスペースを許容（Railsのomakaseと競合するため無効化）
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
+
+# シングルクォートを許容（日本語コメントやハッシュキーで混在しやすいため）
+Style/StringLiterals:
+  Enabled: false
+
+# spec/ や config/ のコメントインデントを緩和
+Layout/CommentIndentation:
+  Enabled: false
+
+# コメントの # 後のスペース強制を無効化（日本語コメントで問題になりやすい）
+Layout/LeadingCommentSpace:
+  Enabled: false
