@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # get "pages/privacy"
   # get "pages/contact"
   # get "home/index"
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#index"
 
