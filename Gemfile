@@ -20,6 +20,8 @@ gem "cssbundling-rails"
 gem "jbuilder"
 # 認証用にdevise追加
 gem "devise"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
 
 gem "ruby-openai"
 
