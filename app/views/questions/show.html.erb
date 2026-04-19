@@ -33,7 +33,8 @@
 
       <div class="flex justify-end">
         <%= f.submit "入力",
-              class: "px-4 py-2 border border-blue-300 text-blue-600 rounded hover:bg-blue-50 transition text-sm" %>
+              class: "px-4 py-2 border border-blue-300 text-blue-600 rounded hover:bg-blue-50 transition text-sm",
+              data: { loading_submit: true } %>
       </div>
 
     <% end %>
